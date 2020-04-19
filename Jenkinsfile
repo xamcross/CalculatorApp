@@ -55,6 +55,11 @@ pipeline {
                     sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
                }
           }
+          stage("Stop Docker container") {
+            steps {
+                sh "docker rm -f calculator"
+            }
+          }
      }
      post {
         success {
