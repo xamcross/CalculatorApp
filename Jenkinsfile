@@ -16,5 +16,15 @@ pipeline {
                     sh "mvn test"
                }
           }
+          stage("Code Coverage") {
+             steps {
+                sh "mvn verify"
+                publishHTML (target: [
+                               reportDir: 'target/site/jacoco',
+                               reportFiles: 'index.html',
+                               reportName: "JaCoCo Report"
+                          ])
+            }
+          }
      }
 }
