@@ -1,2 +1,2 @@
 #!/bin/bash
-test $(curl localhost:8765/calculator) -eq "Calculation finished"
+test $(curl localhost:8765/calculator) -eq 3

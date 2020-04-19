@@ -67,5 +67,8 @@ pipeline {
             subject: 'Jenkins Build Success on a branch: ${currentBuild.fullDisplayName}',
             body: 'Your build completed, please check: ${env.BUILD_URL}'
         }
+        always {
+            sh "docker rm -f calculator"
+        }
      }
 }

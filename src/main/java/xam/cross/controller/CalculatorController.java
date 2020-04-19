@@ -13,6 +13,6 @@ public class CalculatorController {
 
 	@GetMapping
 	public ResponseEntity<?> getCalculation() {
-		return ok("Calculation finished");
+		return ok(3);
 	}
 }
