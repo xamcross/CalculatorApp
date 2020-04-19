@@ -1,5 +1,8 @@
 pipeline {
      agent any
+     triggers {
+          pollSCM('* * * * *')
+     }
      stages {
           stage('Fetch') {
             steps {
@@ -24,6 +27,11 @@ pipeline {
                                reportFiles: 'index.html',
                                reportName: "JaCoCo Report"
                           ])
+            }
+          }
+          stage("Check Style") {
+            steps {
+
             }
           }
      }
