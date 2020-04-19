@@ -29,10 +29,5 @@ pipeline {
                           ])
             }
           }
-          stage("Check Style") {
-            steps {
-
-            }
-          }
      }
 }
