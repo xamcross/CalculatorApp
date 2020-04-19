@@ -29,11 +29,26 @@ pipeline {
                           ])
             }
           }
+          stage("Package") {
+            steps {
+                sh "mvn package"
+            }
+          }
+          stage("Docker Build") {
+            steps {
+                sh "docker build -t xamcross/xamcross ."
+            }
+          }
+          stage("Docker push") {
+               steps {
+                    sh "docker push xamcross/xamcros"
+               }
+          }
      }
      post {
         success {
             mail to: 'xamcross@gmail.com',
-            subject: 'Jenkins Build Success: ${currentBuild.fullDisplayName}',
+            subject: 'Jenkins Build Success on a branch: ${currentBuild.fullDisplayName}',
             body: 'Your build completed, please check: ${env.BUILD_URL}'
         }
      }
