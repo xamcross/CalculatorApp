@@ -29,6 +29,21 @@ pipeline {
                           ])
             }
           }
+          stage("Package") {
+            steps {
+                sh "mvn package"
+            }
+          }
+          stage("Docker Build") {
+            steps {
+                sh "docker build -t xamcross/xamcross ."
+            }
+          }
+          stage("Docker push") {
+               steps {
+                    sh "docker push xamcross/xamcros"
+               }
+          }
      }
      post {
         success {
