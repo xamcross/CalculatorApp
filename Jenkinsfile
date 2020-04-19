@@ -41,7 +41,7 @@ pipeline {
           }
           stage("Docker push") {
                steps {
-                    sh "docker push xamcross/xamcros"
+                    sh "docker push xamcross/xamcross"
                }
           }
      }
