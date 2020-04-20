@@ -16,12 +16,12 @@ pipeline {
           }
           stage("Unit Test") {
                steps {
-                    sh "mvn test"
+                    sh "mvn test -P default"
                }
           }
           stage("Code Coverage") {
              steps {
-                sh "mvn verify"
+                sh "mvn verify -P default"
                 publishHTML (target: [
                                reportDir: 'target/site/jacoco',
                                reportFiles: 'index.html',
@@ -31,7 +31,7 @@ pipeline {
           }
           stage("Package") {
             steps {
-                sh "mvn package"
+                sh "mvn package -P default"
             }
           }
           stage("Docker Build") {
@@ -48,6 +48,11 @@ pipeline {
                steps {
                     sh "docker run -d --rm -p 8765:8080 --name calculator xamcross/xamcross"
                }
+          }
+          stage("Acceptance Test") {
+            steps {
+                sh "mvn test -P acceptance"
+            }
           }
      }
      post {
