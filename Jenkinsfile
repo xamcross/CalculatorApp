@@ -55,11 +55,6 @@ pipeline {
                     sh "chmod +x acceptance_test.sh && ./acceptance_test.sh"
                }
           }
-          stage("Stop Docker container") {
-            steps {
-                sh "docker rm -f calculator"
-            }
-          }
      }
      post {
         success {
@@ -67,7 +62,7 @@ pipeline {
             subject: 'Jenkins Build Success on a branch: ${currentBuild.fullDisplayName}',
             body: 'Your build completed, please check: ${env.BUILD_URL}'
         }
-        failure {
+        always {
             sh "docker rm -f calculator"
         }
      }
